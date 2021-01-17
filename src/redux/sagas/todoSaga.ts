@@ -26,7 +26,16 @@ function* toggleStatusTodo({ payload }: AnyAction) {
   yield put({ type: TODO_ACTIONS.TOGGLE_STATUS_TODO, payload: updatedTodo })
 }
 
+function* deleteTodo({ payload }: AnyAction) {
+  yield put({ type: TODO_ACTIONS.SET_LOADING })
+
+  const deletedTodo = yield call(Api.deleteTodo, payload)
+
+  yield put({ type: TODO_ACTIONS.DELETE_TODO, payload: deletedTodo })
+}
+
 export default function* todoSaga() {
   yield takeEvery(TODO_ACTIONS.FETCH_TODOS_REQUESTED, fetchTodos)
   yield takeEvery(TODO_ACTIONS.TOGGLE_STATUS_TODO_REQUESTED, toggleStatusTodo)
+  yield takeEvery(TODO_ACTIONS.DELETE_TODO_REQUESTED, deleteTodo)
 }

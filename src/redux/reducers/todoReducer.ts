@@ -22,9 +22,13 @@ const todoReducer = (state = initialState, { type, payload }: TodosActionTypes) 
     case TODO_ACTIONS.TOGGLE_STATUS_TODO:
       return {
         ...state,
-        todos: state.todos.map((todo) => {
-          return todo.id === payload.id ? payload : todo
-        }),
+        todos: state.todos.map((todo) => todo.id === payload.id ? payload : todo),
+        loading: false
+      }
+    case TODO_ACTIONS.DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== payload),
         loading: false
       }
     default:

@@ -42,6 +42,7 @@ const Todos = ({
 
 const Container = styled.div`
   max-width: 600px;
+  width: 100%;
 `
 
 const Title = styled.h1`

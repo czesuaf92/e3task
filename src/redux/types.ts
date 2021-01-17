@@ -12,16 +12,19 @@ export interface TodosState {
   todos: TodoTypes[];
 }
 
-export interface FetchTodosTypes {
+export interface DeleteTodoTypes {
+  id: number;
+}
+
+export interface ToggleStatusTodoTypes {
+  id: number;
+  completed: boolean;
+}
+
+export interface TodosActionTypes {
   type: TODO_ACTIONS;
   payload: any;
 }
 
-export type TodosActionTypes = FetchTodosTypes;
-
 export type SearchParamsTypes = (string | number)[][];
 
-export interface ToggleStatusTodoPayload {
-  id: number,
-  completed: boolean;
-}

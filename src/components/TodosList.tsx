@@ -19,7 +19,8 @@ export const TodosList = ({ todos }: TodosListProps) => {
 }
 
 const StyledTodosList = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   width: 100%;
+  border: 1px solid black;
 `

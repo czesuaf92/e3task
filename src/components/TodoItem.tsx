@@ -2,10 +2,11 @@ import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import styled from 'styled-components'
 import { TODO_ACTIONS } from '../redux/actions/todoActions'
-import { TodoTypes, ToggleStatusTodoPayload } from '../redux/types'
+import { DeleteTodoTypes, TodoTypes, ToggleStatusTodoTypes } from '../redux/types'
 
 const mapDispatch = (dispatch: any) => ({
-  toggleStatusTodo: (payload: ToggleStatusTodoPayload) => dispatch({ type: TODO_ACTIONS.TOGGLE_STATUS_TODO_REQUESTED, payload: payload })
+  toggleStatusTodo: (payload: ToggleStatusTodoTypes) => dispatch({ type: TODO_ACTIONS.TOGGLE_STATUS_TODO_REQUESTED, payload }),
+  deleteTodo: (payload: DeleteTodoTypes) => dispatch({ type: TODO_ACTIONS.DELETE_TODO_REQUESTED, payload })
 })
 
 const connector = connect(null, mapDispatch)
@@ -15,34 +16,47 @@ type TodoItemProps = PropsFromRedux & {
   todo: TodoTypes
 }
 
-const TodoItem = ({ todo: { title, completed, id }, toggleStatusTodo }: TodoItemProps) => {
+const TodoItem = ({
+  todo: {
+    title,
+    completed,
+    id
+  },
+  toggleStatusTodo,
+  deleteTodo
+}: TodoItemProps) => {
   return (
     <StyledTodoItem>
-      <input type="checkbox" checked={completed} onChange={() => toggleStatusTodo({ id: id, completed: !completed })} />
+      <input type="checkbox" checked={completed} onChange={() => toggleStatusTodo({ id, completed: !completed })} />
       <StyledTodoTitle>{title}</StyledTodoTitle>
-      { completed && <StyledDeleteButton type="button">Delete</StyledDeleteButton>}
+      { completed && <StyledDeleteButton type="button" onClick={() => deleteTodo({ id })}>Delete</StyledDeleteButton>}
     </StyledTodoItem>
   )
 }
 
 const StyledTodoItem = styled.div`
+  width: 100%;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
-  margin-bottom: 1rem;
   position: relative;
-  /* background-color: red; */
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  &:not(:last-child) {
+    border-bottom: 1px solid black;
+  }
 `
 
 const StyledTodoTitle = styled.p`
   text-align: left;
   margin-left: 0.5rem;
   padding-right: 5rem;
+  padding: 0;
+  flex: 1 0 auto;
 `
 
 const StyledDeleteButton = styled.button`
   position: absolute;
-  right: 0;
+  right: 2rem;
   background-color: red;
   color: white;
   margin-left: auto;
