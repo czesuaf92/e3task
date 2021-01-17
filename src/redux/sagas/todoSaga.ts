@@ -34,8 +34,17 @@ function* deleteTodo({ payload }: AnyAction) {
   yield put({ type: TODO_ACTIONS.DELETE_TODO, payload: deletedTodo })
 }
 
+function* createTodo({ payload }: AnyAction) {
+  yield put({ type: TODO_ACTIONS.SET_LOADING })
+
+  const newTodo = yield call(Api.createTodo, payload)
+
+  yield put({ type: TODO_ACTIONS.CREATE_TODO, payload: newTodo })
+}
+
 export default function* todoSaga() {
   yield takeEvery(TODO_ACTIONS.FETCH_TODOS_REQUESTED, fetchTodos)
   yield takeEvery(TODO_ACTIONS.TOGGLE_STATUS_TODO_REQUESTED, toggleStatusTodo)
   yield takeEvery(TODO_ACTIONS.DELETE_TODO_REQUESTED, deleteTodo)
+  yield takeLatest(TODO_ACTIONS.CREATE_TODO_REQUESTED, createTodo)
 }

@@ -2,7 +2,7 @@ import { TODO_ACTIONS } from '../actions/todoActions';
 import { TodosActionTypes, TodosState } from '../types';
 
 const initialState: TodosState = {
-  loading: false,
+  loading: true,
   todos: []
 }
 
@@ -29,6 +29,12 @@ const todoReducer = (state = initialState, { type, payload }: TodosActionTypes) 
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== payload),
+        loading: false
+      }
+    case TODO_ACTIONS.CREATE_TODO:
+      return {
+        ...state,
+        todos: [...state.todos, payload],
         loading: false
       }
     default:

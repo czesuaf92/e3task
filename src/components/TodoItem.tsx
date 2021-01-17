@@ -27,9 +27,20 @@ const TodoItem = ({
 }: TodoItemProps) => {
   return (
     <StyledTodoItem>
-      <input type="checkbox" checked={completed} onChange={() => toggleStatusTodo({ id, completed: !completed })} />
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={() => toggleStatusTodo({ id, completed: !completed })}
+      />
       <StyledTodoTitle>{title}</StyledTodoTitle>
-      { completed && <StyledDeleteButton type="button" onClick={() => deleteTodo({ id })}>Delete</StyledDeleteButton>}
+      { completed && (
+        <StyledDeleteButton
+          type="button"
+          onClick={() => deleteTodo({ id })}
+        >
+          Delete
+        </StyledDeleteButton>
+      )}
     </StyledTodoItem>
   )
 }
@@ -39,7 +50,7 @@ const StyledTodoItem = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  padding: 1rem 2rem;
+  padding: 1rem 5rem 1rem 1rem;
   box-sizing: border-box;
   &:not(:last-child) {
     border-bottom: 1px solid black;
@@ -49,14 +60,11 @@ const StyledTodoItem = styled.div`
 const StyledTodoTitle = styled.p`
   text-align: left;
   margin-left: 0.5rem;
-  padding-right: 5rem;
-  padding: 0;
-  flex: 1 0 auto;
 `
 
 const StyledDeleteButton = styled.button`
   position: absolute;
-  right: 2rem;
+  right: 1rem;
   background-color: red;
   color: white;
   margin-left: auto;

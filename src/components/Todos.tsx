@@ -1,9 +1,11 @@
-import React, { Dispatch, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { connect, ConnectedProps } from 'react-redux'
 import { TODO_ACTIONS } from '../redux/actions/todoActions'
 import { TodosState } from '../redux/types'
 import { TodosList } from './TodosList'
+import CreateTodo from './CreateTodo';
+import { Loader } from './Loader'
 
 interface RootState {
   todo: TodosState
@@ -32,7 +34,8 @@ const Todos = ({
   return (
     <Container>
       <Title>To Do</Title>
-      {loading && 'Loading...'}
+      {todos.length < 10 && !loading && <CreateTodo />}
+      {loading && <Loader />}
       <TodosList todos={todos} />
     </Container>
   );
@@ -43,6 +46,7 @@ const Todos = ({
 const Container = styled.div`
   max-width: 600px;
   width: 100%;
+  position: relative;
 `
 
 const Title = styled.h1`

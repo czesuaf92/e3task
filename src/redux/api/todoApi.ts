@@ -1,5 +1,5 @@
 import { apiClient } from "../../api/client"
-import { DeleteTodoTypes, TodoTypes, ToggleStatusTodoTypes } from "../types";
+import { CreateTodoTypes, DeleteTodoTypes, TodoTypes, ToggleStatusTodoTypes } from "../types";
 
 
 export const fetchTodosList = async () => {
@@ -23,4 +23,14 @@ export const deleteTodo = async ({ id }: DeleteTodoTypes) => {
   await apiClient.delete(`todos/${id}`)
 
   return id
+}
+
+export const createTodo = async ({ title }: CreateTodoTypes) => {
+  return await apiClient.post('todos', {
+    json: {
+      title,
+      completed: false,
+      userId: 1
+    }
+  }).json<TodoTypes>()
 }

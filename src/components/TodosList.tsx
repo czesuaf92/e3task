@@ -9,9 +9,12 @@ interface TodosListProps {
 
 
 export const TodosList = ({ todos }: TodosListProps) => {
+  if (todos.length === 0) {
+    return null
+  }
   return (
     <StyledTodosList>
-      {todos?.map((todo) => (
+      {todos.map((todo) => (
         <TodoItem todo={todo} key={todo.id} />
       ))}
     </StyledTodosList>

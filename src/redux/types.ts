@@ -16,6 +16,10 @@ export interface DeleteTodoTypes {
   id: number;
 }
 
+export interface CreateTodoTypes {
+  title: string
+}
+
 export interface ToggleStatusTodoTypes {
   id: number;
   completed: boolean;
