@@ -13,8 +13,8 @@ const mapState = (state: RootState) => ({
   todo: state.todo
 })
 
-const mapDispatch = (dispatch: Dispatch<{ type: TODO_ACTIONS }>) => ({
-  fetchTodos: () => dispatch({ type: TODO_ACTIONS.FETCH_TODOS_REQUESTED }),
+const mapDispatch = (dispatch: any) => ({
+  fetchTodos: () => dispatch({ type: TODO_ACTIONS.FETCH_TODOS_REQUESTED })
 })
 
 const connector = connect(mapState, mapDispatch)
@@ -41,7 +41,6 @@ const Todos = ({
 
 
 const Container = styled.div`
-  
   max-width: 600px;
 `
 

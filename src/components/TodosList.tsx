@@ -1,11 +1,13 @@
 import React from "react"
 import styled from "styled-components"
 import { TodoTypes } from "../redux/types"
-import { TodoItem } from "./TodoItem"
+import TodoItem from "./TodoItem"
 
 interface TodosListProps {
   todos: TodoTypes[]
 }
+
+
 export const TodosList = ({ todos }: TodosListProps) => {
   return (
     <StyledTodosList>

@@ -14,9 +14,14 @@ export interface TodosState {
 
 export interface FetchTodosTypes {
   type: TODO_ACTIONS;
-  payload: TodosState;
+  payload: any;
 }
 
 export type TodosActionTypes = FetchTodosTypes;
 
 export type SearchParamsTypes = (string | number)[][];
+
+export interface ToggleStatusTodoPayload {
+  id: number,
+  completed: boolean;
+}

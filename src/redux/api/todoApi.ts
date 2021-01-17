@@ -1,4 +1,5 @@
 import { apiClient } from "../../api/client"
+import { TodoTypes, ToggleStatusTodoPayload } from "../types";
 
 
 export const fetchTodosList = async () => {
@@ -9,5 +10,11 @@ export const fetchTodosList = async () => {
   return apiClient.get("todos", {
     searchParams
   })
-    .json<any>();
+    .json<TodoTypes[]>();
+}
+
+export const toggleStatusTodo = async ({ id, completed }: ToggleStatusTodoPayload) => {
+  return apiClient.patch(`todos/${id}`, {
+    json: { completed }
+  }).json<TodoTypes>()
 }
